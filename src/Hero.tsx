@@ -2,34 +2,22 @@ import styled from "styled-components";
 import { Button, Flex, Typography } from "antd";
 import chatGptLaptop from "./assets/chatGptLaptop.png";
 import { useEffect, useState } from "react";
+import { useParallaxEffect } from "./useParallaxEffect";
+import { cta, heading, subheading } from "./constants/hero";
 
 const { Title } = Typography;
 
-const useParallaxEffect = () => {
-  const [offsetY, setOffsetY] = useState(0);
-
-  const handleScroll = () => {
-    const scrollPosition = window.pageYOffset;
-    setOffsetY(scrollPosition);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return offsetY;
-};
-
-const HeroContainer = styled(Flex)<{ offset: number }>`
+const HeroContainer = styled(Flex)<{ offset: number; loaded: boolean }>`
   background-image: url(${chatGptLaptop});
   background-attachment: scroll;
-  background-position: center ${(props) => props.offset * 0.5}px; // Parallax effect
+  background-position: center ${({ offset }) => offset * 0.5}px;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
   width: 100vw;
   text-align: center;
+  transition: opacity 1s ease-out;
+  opacity: ${({ loaded }) => (loaded ? 1 : 0)};
 `;
 
 const TextOverlay = styled(Flex)`
@@ -47,24 +35,27 @@ const HeroSubheading = styled(Title)`
   color: white !important;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 `;
+
 export const Hero = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const offsetY = useParallaxEffect();
+
+  useEffect(() => setIsLoaded(true), []);
+
   return (
     <HeroContainer
-      id="/"
+      loaded={isLoaded}
+      id="home"
       align="center"
       justify="center"
       vertical
       offset={offsetY}
     >
       <TextOverlay align="center" justify="center" vertical>
-        <HeroHeading level={1}>Building Your Digital Presence</HeroHeading>
-        <HeroSubheading level={3}>
-          Crafting unique and user-friendly web experiences tailored to your
-          needs.
-        </HeroSubheading>
+        <HeroHeading level={1}>{heading}</HeroHeading>
+        <HeroSubheading level={3}>{subheading}</HeroSubheading>
         <Button type="primary" href="/#services">
-          Explore Our Services
+          {cta}
         </Button>
       </TextOverlay>
     </HeroContainer>

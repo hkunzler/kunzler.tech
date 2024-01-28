@@ -3,6 +3,7 @@ import { Card, Divider } from "antd";
 import { Section } from "./customComponents/Section";
 import { StyledTitle } from "./customComponents/Title";
 import { TierSelectionQuiz } from "./TierSelectionQuiz";
+import { heading, tiers } from "./constants/tierDisplay";
 
 const TierTitle = styled.h3`
   color: #0052cc;
@@ -44,34 +45,6 @@ const PricingInfo = styled.div`
   text-align: center;
 `;
 
-const tiers = [
-  {
-    title: "Starter Package",
-    features: ["Single-page layout", "Responsive design", "Basic SEO"],
-    totalPrice: "Starting at $499",
-    subscription: "$0 down, $100/month for site maintenance and support",
-  },
-  {
-    title: "Business Growth Package",
-    features: ["Multi-page setup", "CMS Integration", "Advanced SEO"],
-    totalPrice: "$999",
-    subscription: "$0 down, $200/month for site maintenance and support",
-  },
-  {
-    title: "Premium Custom Package",
-    features: [
-      "Integration with a headless CMS",
-      "On-site editing capabilities",
-      "Customizable layouts and content structures",
-      "Advanced SEO management and strategy",
-      "Dedicated technical support",
-    ],
-    totalPrice: "Contact for quote",
-    subscription:
-      "$0 down, starting at $300/month for site maintenance and support",
-  },
-];
-
 export const TierDisplay = () => {
   return (
     <Section
@@ -83,7 +56,7 @@ export const TierDisplay = () => {
       gap={"middle"}
     >
       <StyledTitle level={2} secondary>
-        Tier Options
+        {heading}
       </StyledTitle>
       <TierOptions>
         {tiers.map((tier, index) => (

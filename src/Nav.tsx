@@ -67,38 +67,59 @@ export const Nav = () => {
     setMobileMenuVisible(false);
   };
 
+  const easeInOutCubic = (t) =>
+    t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+
+  const smoothScrollTo = (elementY, duration) => {
+    const startingY = window.pageYOffset;
+    const diff = elementY - startingY;
+    let start;
+
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const time = timestamp - start;
+      const percent = Math.min(time / duration, 1);
+      const easing = easeInOutCubic(percent);
+
+      window.scrollTo(0, startingY + diff * easing);
+
+      if (time < duration) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  };
+
+  const scrollToSection = (sectionId) => {
+    const section = document.querySelector(sectionId);
+    if (section) {
+      const sectionTop = section.offsetTop;
+      smoothScrollTo(sectionTop, 500); // Adjust duration as needed
+    }
+    setMobileMenuVisible(false);
+  };
+
   const menuItems = [
     {
       key: "about-us",
-      label: (
-        <a href="#about-us" onClick={closeMobileMenu}>
-          About Us
-        </a>
-      ),
+      label: "About Us",
+      onClick: () => scrollToSection("#about-us"),
     },
     {
       key: "services",
-      label: (
-        <a href="#services" onClick={closeMobileMenu}>
-          Services
-        </a>
-      ),
+      label: "Services",
+      onClick: () => scrollToSection("#services"),
     },
     {
       key: "tiers",
-      label: (
-        <a href="#tiers" onClick={closeMobileMenu}>
-          Tier Options
-        </a>
-      ),
+      label: "Tier Options",
+      onClick: () => scrollToSection("#tiers"),
     },
     {
       key: "contact",
-      label: (
-        <a href="#contact" onClick={closeMobileMenu}>
-          Contact
-        </a>
-      ),
+      label: "Contact",
+      onClick: () => scrollToSection("#contact"),
     },
   ];
 
@@ -138,7 +159,7 @@ export const Nav = () => {
       <FixedNavContainer>
         <LogoButton
           type="text"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          onClick={() => scrollToSection("#home")}
           aria-label="Scroll to top" // Provide an accessible label for screen readers
         >
           <Logo src={logoImg} alt="Kunzler Technology" />

@@ -7,6 +7,16 @@ import {
 import { Button, Flex, Typography } from "antd";
 import { Section } from "./customComponents/Section";
 import { StyledTitle } from "./customComponents/Title";
+import {
+  heading,
+  phoneNumberHref,
+  phoneLabel,
+  phoneNumber,
+  meetingLabel,
+  meetingLink,
+  localText,
+  location,
+} from "./constants/letsConnect";
 
 const { Paragraph } = Typography;
 
@@ -25,31 +35,28 @@ export const LetsConnect = () => {
       vertical
       gap={"middle"}
     >
-      <StyledTitle level={2}>Let's Connect!</StyledTitle>
+      <StyledTitle level={2}>{heading}</StyledTitle>
       <Flex align="center" justify="center" wrap="wrap" gap={"middle"}>
         <Flex align="center" justify="center">
           <PhoneOutlined style={iconStyles} />
           <Flex align="start" vertical>
-            <PhoneOption>Call or Text: </PhoneOption>
-            <Button type="link" href="tel:+13072139577">
-              +1 (307) 213-9577
+            <PhoneOption>{phoneLabel}</PhoneOption>
+            <Button type="link" href={phoneNumberHref}>
+              {phoneNumber}
             </Button>
           </Flex>
         </Flex>
         <Flex align="center" justify="center">
           <CalendarOutlined style={iconStyles} />
-          <Button type="link" href="https://calendly.com/hkunzler">
-            Schedule a Meeting
+          <Button type="link" href={meetingLink}>
+            {meetingLabel}
           </Button>
         </Flex>
       </Flex>
       <div>
-        <Paragraph>
-          If you’re local, we’d be happy to arrange an in-person meet-up. Reach
-          out to us, and let’s find a convenient time and place!
-        </Paragraph>
+        <Paragraph>{localText}</Paragraph>
         <Flex align="center" justify="center" gap={"middle"}>
-          <EnvironmentOutlined style={iconStyles} /> Cody, WY
+          <EnvironmentOutlined style={iconStyles} /> {location}
         </Flex>
       </div>
     </Section>
