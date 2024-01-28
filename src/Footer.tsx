@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import styled from "styled-components";
-import { copyright } from "./constants/footer";
+import i18n from "./i18n";
 
 const { Footer } = Layout;
 
@@ -8,4 +8,6 @@ const StyledFooter = styled(Footer)`
   text-align: center;
 `;
 
-export const FooterComponent = () => <StyledFooter>{copyright}</StyledFooter>;
+const currentYear = new Date().getFullYear();
+
+export const FooterComponent = () => <StyledFooter>{i18n.t('footer__copyright', { year: currentYear })}</StyledFooter>;

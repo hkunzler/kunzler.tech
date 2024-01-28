@@ -1,11 +1,11 @@
 import { Nav } from "./Nav";
-import { Hero } from "./Hero";
+import { HeroContainer } from "./Hero/Hero.container";
 import { OurStory } from "./OurStory";
-import { Services } from "./Services";
+import { ServicesContainer } from "./Services/Services.container";
 import { LetsConnect } from "./LetsConnect";
 import { FooterComponent } from "./Footer";
 import { ConfigProvider, Layout } from "antd";
-import { TierDisplay } from "./TierDisplay";
+import { TierDisplayContainer } from "./TierDisplay/TierDisplay.container";
 import { theme } from "./theme";
 
 const { Content } = Layout;
@@ -16,10 +16,10 @@ function App() {
       <Layout>
         <Nav />
         <Content>
-          <Hero />
+          <HeroContainer />
           <OurStory />
-          <Services />
-          <TierDisplay />
+          <ServicesContainer />
+          <TierDisplayContainer />
           <LetsConnect />
         </Content>
         <FooterComponent />

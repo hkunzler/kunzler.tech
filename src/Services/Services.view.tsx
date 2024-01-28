@@ -1,21 +1,16 @@
 import { Card, Flex, Typography } from "antd";
-import styled from "styled-components";
-import { Section } from "./customComponents/Section";
-import { services, heading } from "./constants/services";
+import { Section } from "../customComponents/Section";
+import { t } from "i18next";
+import { StyledCard } from "../Services/Services.styled";
+import { IServices } from "./Services.interface";
 
 const { Title } = Typography;
 const { Meta } = Card;
 
-const StyledCard = styled(Card)`
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 15rem;
-  height: 15rem;
-`;
-
-export const Services = () => {
+export const Services = ({ services }: IServices) => {
   return (
     <Section id="services" align="center" vertical>
-      <Title level={2}>{heading}</Title>
+      <Title level={2}>{t("services__heading")}</Title>
       <Flex gap="middle" align="center" justify="center" wrap="wrap">
         {services.map(({ cover, title, description }) => (
           <StyledCard cover={cover} bodyStyle={{ textAlign: "center" }}>

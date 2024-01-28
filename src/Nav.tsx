@@ -3,6 +3,8 @@ import { Button, Drawer, Layout, Menu } from "antd";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import logoImg from "./assets/kunzler_tech_logo.png";
 import styled from "styled-components";
+import { smoothScroll } from "./smoothScroll";
+import { $t } from "./i18n";
 
 const { Header } = Layout;
 
@@ -63,39 +65,11 @@ export const Nav = () => {
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [selectedKey, setSelectedKey] = useState("/");
 
-  const closeMobileMenu = () => {
-    setMobileMenuVisible(false);
-  };
-
-  const easeInOutCubic = (t) =>
-    t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-
-  const smoothScrollTo = (elementY, duration) => {
-    const startingY = window.pageYOffset;
-    const diff = elementY - startingY;
-    let start;
-
-    const step = (timestamp) => {
-      if (!start) start = timestamp;
-      const time = timestamp - start;
-      const percent = Math.min(time / duration, 1);
-      const easing = easeInOutCubic(percent);
-
-      window.scrollTo(0, startingY + diff * easing);
-
-      if (time < duration) {
-        window.requestAnimationFrame(step);
-      }
-    };
-
-    window.requestAnimationFrame(step);
-  };
-
-  const scrollToSection = (sectionId) => {
-    const section = document.querySelector(sectionId);
+  const scrollToSection = (sectionId: string) => {
+    const section: HTMLElement = document.querySelector(sectionId)!;
     if (section) {
       const sectionTop = section.offsetTop;
-      smoothScrollTo(sectionTop, 500); // Adjust duration as needed
+      smoothScroll(sectionTop, 500);
     }
     setMobileMenuVisible(false);
   };
@@ -103,22 +77,22 @@ export const Nav = () => {
   const menuItems = [
     {
       key: "about-us",
-      label: "About Us",
+      label: $t("nav__about_us"),
       onClick: () => scrollToSection("#about-us"),
     },
     {
       key: "services",
-      label: "Services",
+      label: $t("nav__services"),
       onClick: () => scrollToSection("#services"),
     },
     {
       key: "tiers",
-      label: "Tier Options",
+      label: $t("nav__tier_options"),
       onClick: () => scrollToSection("#tiers"),
     },
     {
       key: "contact",
-      label: "Contact",
+      label: $t("nav__contact"),
       onClick: () => scrollToSection("#contact"),
     },
   ];
@@ -134,7 +108,9 @@ export const Nav = () => {
     const handleScroll = () => {
       const offset = window.innerHeight / 2;
       const currentScroll = window.scrollY + offset;
-      const divs: HTMLElement[] = document.querySelectorAll("div[id]");
+      const divs: HTMLElement[] = [
+        ...document.querySelectorAll("div[id]"),
+      ] as HTMLElement[];
 
       let lastDivId = null;
       divs.forEach((div) => {
@@ -160,7 +136,7 @@ export const Nav = () => {
         <LogoButton
           type="text"
           onClick={() => scrollToSection("#home")}
-          aria-label="Scroll to top" // Provide an accessible label for screen readers
+          aria-label={$t("nav__scroll_to_top")}
         >
           <Logo src={logoImg} alt="Kunzler Technology" />
         </LogoButton>
