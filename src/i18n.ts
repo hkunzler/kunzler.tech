@@ -20,5 +20,3 @@ i18n
   });
 
 export default i18n;
-
-export const $t = (key: string) => i18n.t(key);

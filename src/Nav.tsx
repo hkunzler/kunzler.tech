@@ -4,7 +4,7 @@ import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import logoImg from "./assets/kunzler_tech_logo.png";
 import styled from "styled-components";
 import { smoothScroll } from "./smoothScroll";
-import { $t } from "./i18n";
+import { t } from "i18next";
 
 const { Header } = Layout;
 
@@ -77,22 +77,22 @@ export const Nav = () => {
   const menuItems = [
     {
       key: "about-us",
-      label: $t("nav__about_us"),
+      label: t("nav__about_us"),
       onClick: () => scrollToSection("#about-us"),
     },
     {
       key: "services",
-      label: $t("nav__services"),
+      label: t("nav__services"),
       onClick: () => scrollToSection("#services"),
     },
     {
       key: "tiers",
-      label: $t("nav__tier_options"),
+      label: t("nav__tier_options"),
       onClick: () => scrollToSection("#tiers"),
     },
     {
       key: "contact",
-      label: $t("nav__contact"),
+      label: t("nav__contact"),
       onClick: () => scrollToSection("#contact"),
     },
   ];
@@ -136,7 +136,7 @@ export const Nav = () => {
         <LogoButton
           type="text"
           onClick={() => scrollToSection("#home")}
-          aria-label={$t("nav__scroll_to_top")}
+          aria-label={t("nav__scroll_to_top")}
         >
           <Logo src={logoImg} alt="Kunzler Technology" />
         </LogoButton>
