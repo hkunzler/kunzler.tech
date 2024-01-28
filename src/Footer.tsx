@@ -1,5 +1,5 @@
-import { Layout } from 'antd';
-import styled from 'styled-components';
+import { Layout } from "antd";
+import styled from "styled-components";
 
 const { Footer } = Layout;
 
@@ -9,6 +9,9 @@ const StyledFooter = styled(Footer)`
 
 export const FooterComponent = () => {
   return (
-    <StyledFooter> © {new Date().getFullYear()} Kunzler Technology, L.L.C. All rights reserved.</StyledFooter>
+    <StyledFooter>
+      © {new Date().getFullYear()} Kunzler Technology, L.L.C. All rights
+      reserved.
+    </StyledFooter>
   );
 };
