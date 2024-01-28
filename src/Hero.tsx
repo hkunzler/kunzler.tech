@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { Button, Flex, Typography, Layout } from 'antd';
+import { Button, Flex, Typography } from 'antd';
 import chatGptLaptop from './assets/chatGptLaptop.png'
 import { useEffect, useState } from 'react';
 
 const { Title } = Typography;
-const { Content } = Layout;
 
 const useParallaxEffect = () => {
   const [offsetY, setOffsetY] = useState(0);

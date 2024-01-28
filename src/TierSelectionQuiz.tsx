@@ -85,8 +85,7 @@ const CheckboxGroup = Checkbox.Group;
     const advancedFeatures = ['Online Payments', 'User Accounts'];
     const needsAdvancedFeatures = answers.features?.some(feature => advancedFeatures.includes(feature));
   
-    const frequentUpdates = ['Frequently', 'Regularly'];
-    const needsFrequentUpdates = frequentUpdates.includes(answers.updateFrequency);
+    const needsFrequentUpdates = answers.updateFrequency?.includes('Frequently') || answers.updateFrequency?.includes('Regularly');
     const needsIntegration = answers.integration?.includes('Yes');
   
     if (needsIntegration || (needsAdvancedFeatures && needsFrequentUpdates)) {

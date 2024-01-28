@@ -5,11 +5,8 @@ import { OurStory } from './OurStory'
 import { Services } from './Services'
 import { LetsConnect } from './LetsConnect'
 import { FooterComponent } from './Footer'
-import { ConfigProvider, FloatButton, Layout } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
-import { Pricing } from './Pricing'
+import { ConfigProvider, Layout } from 'antd';
 import { TierDisplay } from './TierDisplay'
-import { TierSelectionQuiz } from './TierSelectionQuiz'
 
 const { Content } = Layout;
 
